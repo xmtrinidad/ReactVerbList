@@ -1,0 +1,16 @@
+.VerbList {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.VerbList li:hover {
+    background: #b2dfdb
+}
+
+@media (min-width: 768px) {
+    .VerbList {
+        /* display: grid !important;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: start; */
+    }
+}

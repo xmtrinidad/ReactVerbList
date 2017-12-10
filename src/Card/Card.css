@@ -1,0 +1,13 @@
+.Card {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: -1px 0px 7px -1px rgb(139, 138, 138);
+}
+
+.Card .title {
+    text-align: center;
+}
+
+.Card .translation {
+    text-align: center;
+}
