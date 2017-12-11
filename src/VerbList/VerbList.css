@@ -7,10 +7,11 @@
     background: #b2dfdb
 }
 
-@media (min-width: 768px) {
+@media (min-width: 576px) {
     .VerbList {
-        /* display: grid !important;
+        display: grid !important;
         grid-template-columns: repeat(4, 1fr);
-        align-items: start; */
+        align-items: start;
+        align-content: start;
     }
 }

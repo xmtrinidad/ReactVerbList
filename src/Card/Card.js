@@ -9,7 +9,8 @@ const card = (props) => {
         display: 'block'
     }
     if (props.status) {
-        correct.backgroundColor = '#4CAF50'
+        correct.backgroundColor = '#43A047'
+        correct.color = '#fff'
         correct.alignSelf = 'start';
         hide.display = 'none';
     }

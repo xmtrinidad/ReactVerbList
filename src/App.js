@@ -4,6 +4,7 @@ import './App.css';
 import VerbList from './VerbList/VerbList';
 import AddVerb from './AddVerb/AddVerb';
 import Card from './Card/Card';
+import Footer from './Footer/Footer';
 
 class App extends Component {
   state = {
@@ -12,9 +13,18 @@ class App extends Component {
       { verb: 'ver', translation: 'to see', userInput: '' },
       { verb: 'tener', translation: 'to have', userInput: '' },
       { verb: 'querer', translation: 'to want', userInput: '' },
+      { verb: 'ser', translation: 'to be', userInput: '' },
+      { verb: 'estar', translation: 'to be', userInput: '' },
+      { verb: 'hacer', translation: 'to do', userInput: '' },
+      { verb: 'decir', translation: 'to say', userInput: '' },
+      { verb: 'ir', translation: 'to go', userInput: '' },
+      { verb: 'dar', translation: 'to give', userInput: '' },
+      { verb: 'llegar', translation: 'to arrive', userInput: '' },
+      { verb: 'encontrar', translation: 'to find', userInput: '' },
     ],
     newSpanishVerb: '',
-    newEnglishVerb: ''
+    newEnglishVerb: '',
+    valid: true
   }
 
   /**
@@ -23,9 +33,9 @@ class App extends Component {
    */
   updateVerb(event) {
     const verb = event.target.value;
-    event.target.id === 'spa' ? 
-      this.setState({newSpanishVerb: verb}) :
-      this.setState({newEnglishVerb: verb});
+    event.target.id === 'spa' ?
+      this.setState({ newSpanishVerb: verb }) :
+      this.setState({ newEnglishVerb: verb });
   }
 
   /**
@@ -33,11 +43,15 @@ class App extends Component {
    */
   addVerb() {
     if (this.checkIfVerbExist()) {
+      const validation = false;
+      this.setState({ valid: validation });
       return;
     }
     // Check for empty input fields
     if (this.state.newEnglishVerb.trim() === '' || this.state.newSpanishVerb.trim() === '') {
-      return
+      const validation = false;
+      this.setState({ valid: validation });
+      return;
     }
 
     const verbs = [...this.state.verbs];
@@ -50,7 +64,8 @@ class App extends Component {
     this.setState({
       verbs: verbs,
       newSpanishVerb: '',
-      newEnglishVerb: ''
+      newEnglishVerb: '',
+      valid: true
     });
   }
 
@@ -70,12 +85,12 @@ class App extends Component {
    */
   cardInput(event, passedInVerb) {
     const verbIndex = this.state.verbs.findIndex(v => v.verb === passedInVerb);
-    const verb = {...this.state.verbs[verbIndex]};
+    const verb = { ...this.state.verbs[verbIndex] };
     verb.userInput = event.target.value;
 
     const verbs = [...this.state.verbs];
     verbs[verbIndex] = verb;
-    this.setState({verbs: verbs});
+    this.setState({ verbs: verbs });
   }
 
   checkStatus(verb) {
@@ -84,8 +99,8 @@ class App extends Component {
 
   render() {
     const verbs = this.state.verbs;
-    const cards = verbs.map(v => 
-      <Card 
+    const cards = verbs.map(v =>
+      <Card
         status={this.checkStatus(v)}
         userInput={v.userInput}
         changed={(event) => this.cardInput(event, v.verb)}
@@ -96,20 +111,34 @@ class App extends Component {
       <div className="App">
         <div className="jumbotron">
           <h3 className="display-4">Spanish Verb List</h3>
+          <p className="lead">
+            <a href="https://github.com/xmtrinidad/ReactVerbList/blob/master/README.md"><i class="fas fa-book"></i> Readme</a> | <a href="https://github.com/xmtrinidad"><i class="fab fa-github"></i> Github</a>
+          </p>
         </div>
         <div className="container">
+          <div>
+            <h2><i class="fas fa-list-ul"></i> Verb List</h2>
+            <p className="lead">Review the verb list below or add words to the list!</p>
+          </div>
           <div className="top">
-            <AddVerb 
+            <AddVerb
+              validation={this.state.valid}
               spa={this.state.newSpanishVerb}
               eng={this.state.newEnglishVerb}
               changed={(event) => this.updateVerb(event)}
-              add={() => this.addVerb()}/>
+              add={() => this.addVerb()} />
             <VerbList verbs={this.state.verbs} />
+          </div>
+          <hr />
+          <div>
+            <h2><i class="fas fa-clipboard"></i> Verb Quiz</h2>
+            <p className="lead">Enter English translations and test your knowledge of these verbs!</p>
           </div>
           <div className="cards">
             {cards}
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

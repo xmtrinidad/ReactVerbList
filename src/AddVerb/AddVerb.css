@@ -3,3 +3,8 @@
     text-align: center;
     margin-bottom: 10px;
 }
+
+.validation {
+    color: #E53935;
+    font-size: .89rem;
+}
