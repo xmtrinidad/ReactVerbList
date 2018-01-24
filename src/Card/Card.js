@@ -16,7 +16,7 @@ const card = (props) => {
     }
     return (
         <div style={correct} className="Card">
-            <h3 className="title">{props.verb}</h3>
+            <h3 className="title">{props.english}</h3>
             <p className="translation">{props.userInput}</p>
             <div className="form-group" style={hide}>
                 <label htmlFor="user_ans">Translation:</label>

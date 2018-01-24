@@ -86,7 +86,7 @@ class App extends Component {
   cardInput(event, passedInVerb) {
     const verbIndex = this.state.verbs.findIndex(v => v.verb === passedInVerb);
     const verb = { ...this.state.verbs[verbIndex] };
-    verb.userInput = event.target.value;
+    verb.userInput = event.target.value.toLowerCase();
 
     const verbs = [...this.state.verbs];
     verbs[verbIndex] = verb;
@@ -94,7 +94,7 @@ class App extends Component {
   }
 
   checkStatus(verb) {
-    return verb.translation === verb.userInput;
+    return verb.verb === verb.userInput;
   }
 
   render() {
@@ -105,7 +105,7 @@ class App extends Component {
         userInput={v.userInput}
         changed={(event) => this.cardInput(event, v.verb)}
         key={v.verb}
-        verb={v.verb} />
+        english={v.translation} />
     );
     return (
       <div className="App">
@@ -132,7 +132,7 @@ class App extends Component {
           <hr />
           <div>
             <h2><i class="fas fa-clipboard"></i> Verb Quiz</h2>
-            <p className="lead">Enter English translations and test your knowledge of these verbs!</p>
+            <p className="lead">Enter Spanish translations and test your knowledge of these verbs!</p>
           </div>
           <div className="cards">
             {cards}
